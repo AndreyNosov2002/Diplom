@@ -159,10 +159,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])){
         header('location: ' . BASE_URL . 'admin/users/index.php');
     }
 }else{
-    $id =  $user['id'];
-    $admin =  $user['admin'];
-    $username = $user['username'];
-    $email = $user['email'];
+    
 }
 
 //if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pub_id'])){

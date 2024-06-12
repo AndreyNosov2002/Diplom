@@ -31,7 +31,7 @@ input{
     HEADER
  */
 header{
-    background: #008484;
+    background: #050292;
     height: 70px;
 }
 header *{
@@ -64,7 +64,7 @@ header ul li a{
     padding: 22px;
 }
 header ul li a:hover {
-    background: #006669;
+    background: #050292;
     transition: 0.5s;
     color:#fff;
 }
@@ -85,7 +85,7 @@ header ul li ul li {
 header ul li ul li a {
     padding: 10px;
     background: white;
-    color: #008489;
+    color: #050292;
 }
 /*
     SLIDER
@@ -330,7 +330,7 @@ COMMENTS
 }
 .all-comments .one-comment{
     padding: 1rem;
-    border: 1px solid #008484;
+    border: 1px solid #33039a;
     border-radius: 4px;
     margin-bottom: 1rem;
 }

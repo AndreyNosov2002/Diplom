@@ -1,7 +1,6 @@
 ﻿<?php
     include "path.php";
     include "app/controllers/topics.php";
-    include "app/assets/images/posts/";
 
     $page = isset($_GET['page']) ? $_GET['page']: 1;
     $limit = 2;
@@ -10,9 +9,8 @@
 
     $posts = selectAllFromPostsWithUsersOnIndex('posts', 'users', $limit, $offset);
     $topTopic = selectTopTopicFromPostsOnIndex('posts');
+    ?>
 
-
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -39,24 +37,33 @@
 
 <!-- блок карусели START-->
 <div class="container">
-    <div class="row">
-        <h2 class="slider-title">Топ публікації</h2>
-    </div>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <?php foreach ($topTopic as $key => $post): ?>
-                <?php if($key == 0):?>
-                    <div class="carousel-item active">
-                <?php else: ?>
-                    <div class="carousel-item">
-                <?php endif; ?>
-                        <img src="<?=BASE_URL . 'app/assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="d-block w-100">
-                        <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                            <h5><a href="<?=BASE_URL . 'single.php?post=' . $post['id'];?>"><?=substr($post['title'], 0, 120) . '...'  ?></a></h5>
-                        </div>
+<div class="content row">
+        <!-- Main Content -->
+        <div class="main-content col-md-9 col-12">
+            <h2>Топ публікація</h2>
+            <?php foreach ($posts as $post): ?>
+                <div class="post row">
+                    <div class="img col-12 col-md-4">
+                        <img src="<?=BASE_URL . 'app/assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
                     </div>
-            <?php endforeach; ?>
+                    <div class="post_text col-12 col-md-8">
+                        <h3>
+                            <a href="<?=BASE_URL . 'single.php?post=' . $post['id'];?>"><?=substr($post['title'], 0, 80) . '...'  ?></a>
+                        </h3>
+                     
+                        <i class="far fa-calendar"> <?=$post['created_date'];?></i>
+                        <i class="far fa-price"> <label for="exampleInputPassword1" class="form-label">Ціна -</label> <?=$post['price'];?> грн </i>                      
+                      
+                       
+                
+                        
+                        <p class="preview-text">
 
+                            <?=mb_substr($post['content'], 0, 55, 'UTF-8'). '...'  ?>
+                        </p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -79,7 +86,7 @@
             <?php foreach ($posts as $post): ?>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
-                        <img src="<?=BASE_URL . 'assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
+                        <img src="<?=BASE_URL . 'app/assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
                     </div>
                     <div class="post_text col-12 col-md-8">
                         <h3>
@@ -87,12 +94,11 @@
                         </h3>
                         <i class="far fa-user"> <?=$post['username'];?></i>
                         <i class="far fa-calendar"> <?=$post['created_date'];?></i>
-                        <i class="far fa-price"> <label for="exampleInputPassword1" class="form-label">Ціна -</label> <?=$post['price'];?></i>   
-
-                        <a href="<?=BASE_URL . 'single.php?post=' . $post['id'];?>" class="col-2 btn btn-success">Купити</a>
-
-                        <button type="submit"  class="btn btn-secondary" name="button-log">Купити</button>
-
+                        <i class="far fa-price"> <label for="exampleInputPassword1" class="form-label">Ціна -</label> <?=$post['price'];?> грн </i>                      
+                        <a href="https://secure.wayforpay.com/button/bf0a0c47a8089" style="display:inline-block!important;background:#0488cd;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;text-decoration:none!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:center!important;outline:none!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"> <span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;">Оплатити</span></a>
+                       
+                
+                        
                         <p class="preview-text">
 
                             <?=mb_substr($post['content'], 0, 55, 'UTF-8'). '...'  ?>
@@ -106,9 +112,9 @@
         <div class="sidebar col-md-3 col-12">
 
             <div class="section search">
-                <h3>Поиск</h3>
+                <h3>Пошук</h3>
                 <form action="search.php" method="post">
-                    <input type="text" name="search-term" class="text-input" placeholder="Введите искомое слово...">
+                    <input type="text" name="search-term" class="text-input" placeholder="Введіть слово для пошуку...">
                 </form>
             </div>
 

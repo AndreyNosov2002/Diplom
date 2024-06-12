@@ -3,8 +3,9 @@
     include "../../path.php";
     include "../../app/controllers/posts.php";
 ?>
+
 <!doctype html>
-<html lang="ru">
+<html lang="ua">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -37,7 +38,7 @@
                 <a href="<?php echo BASE_URL . "admin/posts/index.php";?>" class="col-3 btn btn-warning">Змінити</a>
             </div>
             <div class="row title-table">
-                <h2>Створити курс</h2>
+                <h2>Додати запис</h2>
             </div>
             <div class="row add-post">
                 <div class="mb-12 col-12 col-md-12 err">
@@ -49,7 +50,7 @@
                         <input value="<?=$title; ?>" name="title" type="text" class="form-control" placeholder="Title" aria-label="Название статьи">
                     </div>
                     <div class="col">
-                        <label for="editor" class="form-label">Вміст курсу</label>
+                        <label for="editor" class="form-label">Контент запису</label>
                         <textarea name="content" id="editor" class="form-control" rows="6"><?=$content; ?></textarea>
                     </div>
                     <div class="input-group col mb-4 mt-4">
@@ -57,11 +58,15 @@
                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     </div>
                     <select name="topic" class="form-select mb-2" aria-label="Default select example">
-                        <option selected>Категорія курсу:</option>
+                        <option selected>Категорія посту:</option>
                         <?php foreach ($topics as $key => $topic): ?>
                             <option value="<?=$topic['id']; ?>"><?=$topic['name'];?></option>
                         <?php endforeach; ?>
                     </select>
+
+                    <div class="col mb-4">
+                        <input value="<?=$title; ?>" name="price" type="text" class="form-control" placeholder="Price" aria-label="Ціна">
+                    </div>
                     <div class="form-check">
                         <input name="publish" class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
                         <label class="form-check-label" for="flexCheckChecked">
@@ -69,7 +74,8 @@
                         </label>
                     </div>
                     <div class="col col-6">
-                        <button name="add_post" class="btn btn-primary" type="submit">Додати курс</button>
+                        <button name="add_post" class="btn btn-primary" type="submit">Додати запис</button>
+                        
                     </div>
                 </form>
             </div>

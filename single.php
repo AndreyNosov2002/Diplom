@@ -36,11 +36,13 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
 
             <div class="single_post row">
                 <div class="img col-12">
-                    <img src="<?=BASE_URL . 'assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
+                    <img src="<?=BASE_URL . 'app/assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
                 </div>
                 <div class="info">
                     <i class="far fa-user"> <?=$post['username'];?></i>
                     <i class="far fa-calendar"> <?=$post['created_date'];?></i>
+                    <i class="far fa-price"> <label for="exampleInputPassword1" class="form-label">Ціна -</label> <?=$post['price'];?> грн</i>    
+                    <a href="https://secure.wayforpay.com/button/bf0a0c47a8089" style="display:inline-block!important;background:#0488cd;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;text-decoration:none!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:center!important;outline:none!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"> <span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;">Оплатити</span></a>
                 </div>
                 <div class="single_post_text col-12">
                     <?=$post['content'];?>

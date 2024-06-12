@@ -1,15 +1,17 @@
 <?php
 
 include SITE_ROOT . "/app/database/db.php";
-
+if (!$_SESSION){
+    header('location: ' . BASE_URL . 'log.php');
+}
 
 $errMsg = [];
 $id = '';
 $title = '';
 $content = '';
 $img = '';
+$price='';
 $topic = '';
-$price = '';
 
 $topics = selectAll('topics');
 $posts = selectAll('posts');
@@ -26,39 +28,39 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])){
 
 
         if (strpos($fileType, 'image') === false) {
-            array_push($errMsg, "Загружений файл не є зображенням!");
+            array_push($errMsg, "Подгружаемый файл не является изображением!");
         }else{
             $result = move_uploaded_file($fileTmpName, $destination);
 
             if ($result){
                 $_POST['img'] = $imgName;
             }else{
-                array_push($errMsg, "Помилка загрузки на сервер");
+                array_push($errMsg, "Ошибка загрузки изображения на сервер");
             }
         }
     }else{
-        array_push($errMsg, "Помилка отримання зображення");
+        array_push($errMsg, "Ошибка получения картинки");
     }
 
     $title = trim($_POST['title']);
     $content = trim($_POST['content']);
+    $price = trim($POST['price']);
     $topic = trim($_POST['topic']);
-    $price = trim($_POST['price']);
     $publish = isset($_POST['publish']) ? 1 : 0;
 
 
     if($title === '' || $content === '' || $topic === ''){
-        array_push($errMsg, "Не всі поля заповнені!");
+        array_push($errMsg, "Не все поля заполнены!");
     }elseif (mb_strlen($title, 'UTF8') < 7){
-        array_push($errMsg, "Назва курсу повинна бути більше 7-ми символів");
+        array_push($errMsg, "Название статьи должно быть более 7-ми символов");
     }else{
         $post = [
             'id_user' => $_SESSION['id'],
             'title' => $title,
             'content' => $content,
+            'price' => $price,
             'img' => $_POST['img'],
             'status' => $publish,
-            'price' => $publish,
             'id_topic' => $topic
         ];
 
@@ -71,8 +73,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])){
     $title = '';
     $content = '';
     $publish = '';
+    $price='';
     $topic = '';
-    $price = '';
 }
 
 
@@ -85,7 +87,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])){
     $content = $post['content'];
     $topic = $post['id_topic'];
     $publish = $post['status'];
-    $price = $post['price'];
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])){
@@ -93,7 +94,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])){
     $title = trim($_POST['title']);
     $content = trim($_POST['content']);
     $topic = trim($_POST['topic']);
-    $price = trim($_POST['price']);
     $publish = isset($_POST['publish']) ? 1 : 0;
 
     if (!empty($_FILES['img']['name'])){
@@ -104,25 +104,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])){
 
 
         if (strpos($fileType, 'image') === false) {
-            array_push($errMsg, "Загружений файл не є зображенням!");
+            array_push($errMsg, "Подгружаемый файл не является изображением!");
         }else{
             $result = move_uploaded_file($fileTmpName, $destination);
 
             if ($result){
                 $_POST['img'] = $imgName;
             }else{
-                array_push($errMsg, "Помилка загрузки зображення на сервер");
+                array_push($errMsg, "Ошибка загрузки изображения на сервер");
             }
         }
     }else{
-        array_push($errMsg, "Помилка отримання зображення");
+        array_push($errMsg, "Ошибка получения картинки");
     }
 
 
     if($title === '' || $content === '' || $topic === ''){
-        array_push($errMsg, "Не всі поля заповнені!");
+        array_push($errMsg, "Не все поля заполнены!");
     }elseif (mb_strlen($title, 'UTF8') < 7){
-        array_push($errMsg, "Назва курсу повинна бути більше 7-ми символів");
+        array_push($errMsg, "Название статьи должно быть более 7-ми символов");
     }else{
         $post = [
             'id_user' => $_SESSION['id'],
@@ -130,7 +130,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])){
             'content' => $content,
             'img' => $_POST['img'],
             'status' => $publish,
-            'price' => $publish,
             'id_topic' => $topic
         ];
 
@@ -138,11 +137,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])){
         header('location: ' . BASE_URL . 'admin/posts/index.php');
     }
 }else{
-    $title = $_POST['title'];
-    $content = $_POST['content'];
+   // $title = $_POST['title'];
+    //$content = $_POST['content'];
     $publish = isset($_POST['publish']) ? 1 : 0;
-    $topic = $_POST['id_topic'];
-    $price = $post['price'];
+   // $topic = $_POST['id_topic'];
 }
 
 // Статус опубликовать или снять с публикации

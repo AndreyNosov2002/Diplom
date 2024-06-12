@@ -8,10 +8,7 @@
             </div>
             <nav class="col-8">
                 <ul>
-                    <li><a href="<?php echo BASE_URL ?>">Головна</a> </li>
-                    <li><a href="<?php echo BASE_URL . 'about.php'?>">Про нас</a> </li>
-                    <li><a href="<?php echo BASE_URL . 'Order.php'?>">Корзина</a> </li>
-
+                    <li><a href="<?php echo BASE_URL ?>">Головна</a> </li>                
                     <li>
                         <?php if (isset($_SESSION['id'])): ?>
                             <a href="#">

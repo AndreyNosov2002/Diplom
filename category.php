@@ -54,7 +54,7 @@
             <?php foreach ($posts as $post): ?>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
-                        <img src="<?=BASE_URL . 'assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
+                        <img src="<?=BASE_URL . 'app/assets/images/posts/' . $post['img'] ?>" alt="<?=$post['title']?>" class="img-thumbnail">
                     </div>
                     <div class="post_text col-12 col-md-8">
                         <h3>

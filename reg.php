@@ -28,7 +28,7 @@
 <!-- FORM -->
 <div class="container reg_form">
     <form action="reg.php" method="post" class="row justify-content-center">
-        <h2>Форма регистрації</h2>
+        <h2>Форма реєстрації</h2>
         <div class="mb-3 col-12 col-md-4 err">
             <p><?=$errMsg?></p>
         </div>
@@ -56,7 +56,9 @@
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <button type="submit" class="btn btn-secondary" name="button-reg">Реєстрація</button>
+           
             <a href="aut.html">Увійти</a>
+            
         </div>
     </form>
 </div>

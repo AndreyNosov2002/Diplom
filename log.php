@@ -47,7 +47,7 @@ include("path.php");
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <button type="submit"  class="btn btn-secondary" name="button-log">Увійти</button>
-            <a href="reg.html">Зареєструватися</a>
+            <a href="reg.php">Зареєструватися</a>
         </div>
     </form>
 </div>
